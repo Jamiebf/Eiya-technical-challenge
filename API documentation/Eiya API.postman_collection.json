@@ -1,0 +1,686 @@
+{
+	"info": {
+		"_postman_id": "0c3a9052-6f1a-4f78-abfc-926a74d270e1",
+		"name": "Eiya API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18057050"
+	},
+	"item": [
+		{
+			"name": "Create vehicle",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"cities_id\" : 3,\n \"consume\" : 2,\n \"distance\" : 4,\n \"consumed\" : 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/vehicle",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"vehicle"
+					]
+				},
+				"description": "Endpoint to create a new vehicle. In this case has two validations:\n\n1.  Validate if the consumed liters is equals to zero, if so, the vehicle will be created with the values in the request body.\n2.  If the consumed liters is distinct to zero, validate the relation between distance and consume to match the value in the consumed liters.\n    \n\n**Request parameters**\n\n| Parameter | Data type | Description |\n| --- | --- | --- |\n| cities_id | int | Represents the current location of the vehicle. |\n| consume | float | Represents the vehicle consume in km/lt. |\n| distance | int | Represents the distance traveled. |\n| consumed | float | Represents the consumed liters. |\n\n**Response status codes**\n\n| **Code** | **Description** |\n| --- | --- |\n| 200 | Successful request |\n| 400 | Bad request. |\n| 500 | Service Error |"
+			},
+			"response": [
+				{
+					"name": "Create vehicle - Error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"cities_id\" : 3,\n \"consume\" : 2,\n \"distance\" : 10,\n \"consumed\" : 9\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/vehicle",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"vehicle"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.1.2 Python/3.8.9"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 May 2022 03:26:18 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "199"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"The data: consume, distance and consumed do not match. Because you are creating the vehicle the division between distance and consume must be equal to consumed.\",\n    \"status\": \"failed\"\n}"
+				},
+				{
+					"name": "Create vehicle - Successful",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"cities_id\" : 3,\n \"consume\" : 2,\n \"distance\" : 4,\n \"consumed\" : 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/vehicle",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"vehicle"
+							]
+						}
+					},
+					"status": "CREATED",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.1.2 Python/3.8.9"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 May 2022 03:27:33 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "61"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"vehicle registered\",\n    \"status\": \"successful\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete vehicle",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/vehicle/5",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"vehicle",
+						"5"
+					]
+				},
+				"description": "Endpoint to delete vehicle by id.\n\n**Request parameters**\n\nFor this endpoint only send the vehicle id to delete in the query string.\n\n**Response status codes**\n\n| **Code** | **Description** |\n| --- | --- |\n| 200 | Successful request |\n| 400 | Bad request. The vehicle does not exist. |\n| 500 | Service Error |"
+			},
+			"response": [
+				{
+					"name": "Delete vehicle - Successful",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/vehicle/6",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"vehicle",
+								"6"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.1.2 Python/3.8.9"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 May 2022 03:41:49 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "58"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"Vehicle deleted\",\n    \"status\": \"successful\"\n}"
+				},
+				{
+					"name": "Delete vehicle - Error",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/vehicle/20",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"vehicle",
+								"20"
+							]
+						}
+					},
+					"status": "BAD REQUEST",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.1.2 Python/3.8.9"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 May 2022 03:42:21 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "56"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"Vehicle not found\",\n    \"status\": \"failed\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update vehicle",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"consume\" : 8\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/vehicle/3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"vehicle",
+						"3"
+					]
+				},
+				"description": "Endpoint to update vehicle info.\n\n**Request parameters**\n\n| Parameter | Data type | Description |\n| --- | --- | --- |\n| cities_id | int | Represents the current location of the vehicle. |\n| consume | float | Represents the vehicle consume in km/lt. |\n| distance | int | Represents the distance traveled. |\n| consumed | float | Represents the consumed liters. |\n\n**Response status codes**\n\n| **Code** | **Description** |\n| --- | --- |\n| 200 | Successful request |\n| 400 | Bad request. Missing body. |\n| 500 | Service Error |"
+			},
+			"response": [
+				{
+					"name": "Update vehicle Successful",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cities_id\": 2,\n    \"consume\": 2,\n    \"consumed\": 10,\n    \"distance\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/vehicle/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"vehicle",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.1.2 Python/3.8.9"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 May 2022 03:48:02 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "91"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"cities_id\": 2,\n    \"consume\": 2,\n    \"consumed\": 10,\n    \"distance\": 5,\n    \"id\": 3\n}"
+				},
+				{
+					"name": "Update vehicle - Error",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cities_id\": 2,\n    \"consume\": 2,\n    \"consumed\": 10,\n    \"distance\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/vehicle/20",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"vehicle",
+								"20"
+							]
+						}
+					},
+					"status": "BAD REQUEST",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.1.2 Python/3.8.9"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 May 2022 03:48:39 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "56"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"Vehicle not found\",\n    \"status\": \"failed\"\n}"
+				},
+				{
+					"name": "Update vehicle - Missing body",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/vehicle/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"vehicle",
+								"3"
+							]
+						}
+					},
+					"status": "BAD REQUEST",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.1.2 Python/3.8.9"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 May 2022 03:49:21 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "51"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"Missing body\",\n    \"status\": \"failed\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get list of vehicles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/vehicle",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"vehicle"
+					]
+				},
+				"description": "Endpoint to get list of vehicles.\n\n**Response status codes**\n\n| **Code** | **Description** |\n| --- | --- |\n| 200 | Successful request |\n| 500 | Service Error |"
+			},
+			"response": [
+				{
+					"name": "Get list of vehicles - Successful",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/vehicle",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"vehicle"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.1.2 Python/3.8.9"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 May 2022 03:56:55 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1773"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"cities_id\": {\n            \"configuration_id\": 1,\n            \"id\": 1,\n            \"name\": \"A\"\n        },\n        \"consume\": 8,\n        \"consumed\": 5,\n        \"distance\": 20,\n        \"id\": 1\n    },\n    {\n        \"cities_id\": {\n            \"configuration_id\": 1,\n            \"id\": 1,\n            \"name\": \"A\"\n        },\n        \"consume\": 3,\n        \"consumed\": 2,\n        \"distance\": 6,\n        \"id\": 2\n    },\n    {\n        \"cities_id\": {\n            \"configuration_id\": 2,\n            \"id\": 2,\n            \"name\": \"B\"\n        },\n        \"consume\": 2,\n        \"consumed\": 10,\n        \"distance\": 5,\n        \"id\": 3\n    },\n    {\n        \"cities_id\": {\n            \"configuration_id\": 2,\n            \"id\": 2,\n            \"name\": \"B\"\n        },\n        \"consume\": 2,\n        \"consumed\": 8,\n        \"distance\": 16,\n        \"id\": 4\n    },\n    {\n        \"cities_id\": {\n            \"configuration_id\": 3,\n            \"id\": 3,\n            \"name\": \"C\"\n        },\n        \"consume\": 2,\n        \"consumed\": 0,\n        \"distance\": 10,\n        \"id\": 7\n    },\n    {\n        \"cities_id\": {\n            \"configuration_id\": 3,\n            \"id\": 3,\n            \"name\": \"C\"\n        },\n        \"consume\": 2,\n        \"consumed\": 0,\n        \"distance\": 10,\n        \"id\": 8\n    },\n    {\n        \"cities_id\": {\n            \"configuration_id\": 3,\n            \"id\": 3,\n            \"name\": \"C\"\n        },\n        \"consume\": 2,\n        \"consumed\": 7,\n        \"distance\": 14,\n        \"id\": 9\n    },\n    {\n        \"cities_id\": {\n            \"configuration_id\": 3,\n            \"id\": 3,\n            \"name\": \"C\"\n        },\n        \"consume\": 2,\n        \"consumed\": 5,\n        \"distance\": 10,\n        \"id\": 10\n    },\n    {\n        \"cities_id\": {\n            \"configuration_id\": 3,\n            \"id\": 3,\n            \"name\": \"C\"\n        },\n        \"consume\": 2,\n        \"consumed\": 2,\n        \"distance\": 14,\n        \"id\": 11\n    },\n    {\n        \"cities_id\": {\n            \"configuration_id\": 3,\n            \"id\": 3,\n            \"name\": \"C\"\n        },\n        \"consume\": 2,\n        \"consumed\": 0,\n        \"distance\": 4,\n        \"id\": 12\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Assign travel",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/travel/9/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"travel",
+						"9",
+						"2"
+					]
+				},
+				"description": "Endpoint to assign a travel to vehicle.\n\n**Request parameters**\n\nFor this request you must send the parameters in the query string.\n\n| **Parameter** | **Data type** | **Description** |\n| --- | --- | --- |\n| vehicle_id | int | Vehicle id assigned to travel. |\n| city_id | int | City id of the final destination. |\n\n**Response status codes**\n\n| **Code** | **Description** |\n| --- | --- |\n| 200 | Successful request |\n| 400 | Bad request. |\n| 500 | Service Error |"
+			},
+			"response": [
+				{
+					"name": "Assign travel - Successful",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/travel/9/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"travel",
+								"9",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.1.2 Python/3.8.9"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 May 2022 03:21:56 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "91"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"cities_id\": 3,\n    \"consume\": 2,\n    \"consumed\": 7,\n    \"distance\": 14,\n    \"id\": 9\n}"
+				},
+				{
+					"name": "Assign travel - Error",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/travel/20/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"travel",
+								"20",
+								"2"
+							]
+						}
+					},
+					"status": "BAD REQUEST",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.1.2 Python/3.8.9"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 May 2022 04:01:54 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "56"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"Vehicle not found\",\n    \"status\": \"failed\"\n}"
+				}
+			]
+		}
+	]
+}
